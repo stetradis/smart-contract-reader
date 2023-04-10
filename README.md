@@ -20,7 +20,7 @@ Smart Contract Reader is a web application built using React and Next.js that us
 2. Install dependencies
 
    ```
-   cd smart-contract-analyzer
+   cd smart-contract-reader
    npm install
    # or
    yarn install
