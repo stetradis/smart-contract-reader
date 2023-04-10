@@ -40,12 +40,11 @@ const Form = (props: FormProps) => {
                         <div className="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
                             <label htmlFor="code" className="sr-only">Insert code</label>
                             <textarea id="code"
-                             rows={20} 
+                             rows={18} 
                              className="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" 
                              placeholder="Insert your code..." 
                              value={text}
                              onChange={(e) => setText(e.target.value)}
-                             maxLength={4097}
                              required>
                              </textarea>
                         </div>
@@ -57,16 +56,20 @@ const Form = (props: FormProps) => {
                             </button>
                         </div>
                     </div>
-                    <p className="ml-auto text-xs text-gray-500 dark:text-gray-400"><b>Note:</b> The OpenAI completions prompt is limited to 4097 tokens for this model.</p>
+                    <p className="ml-auto text-xs text-gray-500 dark:text-gray-400"><b>Note:</b> The OpenAI completions prompt is limited to 4097 tokens for this model. <a href="https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-500 hover:underline">What are tokens?</a></p>
                 </form>
                 
                 <div className="basis-1/2 text-white mx-6">
-                    <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Result:</h2>
-
                     {loading && (
                         <Spinner/>
                     )}
-                    {apiResponse}
+
+                    {apiResponse !== "" && !loading && (
+                        <span>
+                            <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Result:</h2>                    
+                            {apiResponse}
+                        </span>
+                    )}
                 </div>
             </div>
             <ToastContainer
