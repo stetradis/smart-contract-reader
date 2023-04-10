@@ -1,12 +1,14 @@
 import { useState } from "react";
+import Spinner from "./display/Spinner";
 
 type FormProps = {
     readContract: (text: string) => void;
     apiResponse: string;
+    loading: boolean;
 };
 
 const Form = (props: FormProps) => {
-    const {readContract, apiResponse} = props;
+    const {readContract, apiResponse, loading} = props;
     const [text, setText] = useState("");
 
     const SubmitText = (event: any) => {
@@ -22,7 +24,7 @@ const Form = (props: FormProps) => {
     return (
         <section id="code-form" className='m-10'>
             <div className="flex flex-row">
-                <form className="basis-1/2">
+                <form className="basis-1/2 mx-6">
                     <div className="mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                         <div className="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
                             <label htmlFor="code" className="sr-only">Insert code</label>
@@ -44,7 +46,11 @@ const Form = (props: FormProps) => {
                         </div>
                     </div>
                 </form>
-                <div className="basis-1/2 text-white pl-6">
+                <div className="basis-1/2 text-white mx-6">
+                    <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Result:</h2>
+                    {loading && (
+                        <Spinner/>
+                    )}
                     {apiResponse}
                 </div>
             </div>       

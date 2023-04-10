@@ -57,7 +57,7 @@ export default function Home() {
           </div>
         </div>
 
-        <Form readContract={readContract} apiResponse={apiResponse}/>
+        <Form readContract={readContract} apiResponse={apiResponse} loading={loading}/>
         <Footer/>
       </main>
     </>
