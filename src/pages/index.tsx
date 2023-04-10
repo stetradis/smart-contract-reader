@@ -41,7 +41,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className=''>      
+      <main className='h-screen'>      
         <div className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-4">
             <a href="#" className="flex items-center">

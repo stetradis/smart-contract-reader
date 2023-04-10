@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Spinner from "./display/Spinner";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type FormProps = {
     readContract: (text: string) => void;
@@ -14,7 +16,16 @@ const Form = (props: FormProps) => {
     const SubmitText = (event: any) => {
         event.preventDefault();
         if(text === ""){
-            // set error message
+            toast.warn('Please add smart contract code to analyze', {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
         }
         else {
             readContract(text);
@@ -34,6 +45,7 @@ const Form = (props: FormProps) => {
                              placeholder="Insert your code..." 
                              value={text}
                              onChange={(e) => setText(e.target.value)}
+                             maxLength={4097}
                              required>
                              </textarea>
                         </div>
@@ -45,15 +57,30 @@ const Form = (props: FormProps) => {
                             </button>
                         </div>
                     </div>
+                    <p className="ml-auto text-xs text-gray-500 dark:text-gray-400"><b>Note:</b> The OpenAI completions prompt is limited to 4097 tokens for this model.</p>
                 </form>
+                
                 <div className="basis-1/2 text-white mx-6">
                     <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Result:</h2>
+
                     {loading && (
                         <Spinner/>
                     )}
                     {apiResponse}
                 </div>
-            </div>       
+            </div>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </section>
     );
 }
