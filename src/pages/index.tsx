@@ -20,7 +20,7 @@ export default function Home() {
       body: JSON.stringify({
         model: 'text-davinci-003',
         prompt: 'Explain what this smart contract code does in simple terms, identifying any malicious code or vulnerabilities:\n\n ' + text + '',
-        max_tokens: 250,
+        max_tokens: 100,
         temperature: 0.2
       })
     };

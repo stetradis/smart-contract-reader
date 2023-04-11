@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Spinner from "./display/Spinner";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Toast from "./alerts/Toast";
+import { toast } from 'react-toastify';
+
 
 type FormProps = {
     readContract: (text: string) => void;
@@ -12,11 +13,26 @@ type FormProps = {
 const Form = (props: FormProps) => {
     const {readContract, apiResponse, loading} = props;
     const [text, setText] = useState("");
+    // token length is shared between prompt and completion. The limit is 4097 tokens (100 tokens for completion, 3997 for prompt)
+    const maxLength = 15000;
 
     const SubmitText = (event: any) => {
         event.preventDefault();
+
         if(text === ""){
             toast.warn('Please add smart contract code to analyze', {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+        else if(text.length > maxLength){
+            toast.warn('Please submit this code in smaller sections. The API can only process 4097 tokens at a time.', {
                 position: "bottom-left",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -72,18 +88,7 @@ const Form = (props: FormProps) => {
                     )}
                 </div>
             </div>
-            <ToastContainer
-                position="bottom-left"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-            />
+            <Toast/>
         </section>
     );
 }
