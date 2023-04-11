@@ -2,6 +2,7 @@ import { useState } from "react";
 import Spinner from "./display/Spinner";
 import Toast from "./alerts/Toast";
 import { toast } from 'react-toastify';
+import TypeWriter from "./display/TypeWriter";
 
 
 type FormProps = {
@@ -82,8 +83,8 @@ const Form = (props: FormProps) => {
 
                     {apiResponse !== "" && !loading && (
                         <span>
-                            <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Result:</h2>                    
-                            {apiResponse}
+                            <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Result:</h2>
+                            <TypeWriter text={apiResponse}/>
                         </span>
                     )}
                 </div>

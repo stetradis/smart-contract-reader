@@ -28,7 +28,7 @@ export default function Home() {
     const response = await fetch(process.env.NEXT_PUBLIC_OPENAI_API_URL!, options);
 
     const json = await response.json();
-    const result = json.choices[0].text;
+    const result = json.choices[0].text.trim();
     setApiResponse(result);
     setLoading(false);
   }
